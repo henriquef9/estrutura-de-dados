@@ -1,9 +1,9 @@
 package TAD;
 
-public class LinkedList {
+public class LinkedList<T> {
 
-    public No first;
-    public No last;
+    public No<T> first;
+    public No<T> last;
     public int size;
 
     public LinkedList() {
@@ -12,8 +12,8 @@ public class LinkedList {
         this.size = 0;
     }
 
-    public void addFirst(String element){
-        No novo = new No(element);
+    public void addFirst(T element){
+        No<T> novo = new No<T>(element);
         if(this.isEmpty()){
             this.first = novo;
             this.last = novo;
@@ -26,8 +26,8 @@ public class LinkedList {
         this.size++;
     }
 
-    public void addLast(String element){
-        No novo = new No(element);
+    public void addLast(T element){
+        No<T> novo = new No<T>(element);
         if(this.isEmpty()){
             this.first = novo;
             this.last = novo;
@@ -39,11 +39,11 @@ public class LinkedList {
         this.size++;
     }
 
-    public String removeFirst(){
+    public T removeFirst(){
         if(this.isEmpty()){
             return null;
         }else{
-            String element = this.first.getElement();
+            T element = this.first.getElement();
             if(this.size == 1){
                 this.first = null;
                 this.last = null;
@@ -56,11 +56,11 @@ public class LinkedList {
         }
     }
 
-    public String removeLast(){
+    public T removeLast(){
         if(this.isEmpty()){
             return null;
         }else{
-            String element = this.last.getElement();
+            T element = this.last.getElement();
             if(this.size == 1){
                 this.first = null;
                 this.last = null;
@@ -76,6 +76,17 @@ public class LinkedList {
             this.size--;
             return element;
         }
+    }
+
+    public T get(T element){
+        No current = this.first;
+        while(current != null){
+            if(current.getElement() == element){
+                return element;
+            }
+            current = current.getNext();
+        }
+        return null;
     }
 
     public boolean isEmpty(){

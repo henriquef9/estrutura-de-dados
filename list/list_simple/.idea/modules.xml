@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/list_simple.iml" filepath="$PROJECT_DIR$/list_simple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/listas.iml" filepath="$PROJECT_DIR$/listas.iml" />
     </modules>
   </component>
 </project>

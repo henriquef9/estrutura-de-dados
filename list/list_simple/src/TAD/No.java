@@ -1,29 +1,29 @@
 package TAD;
 
-public class No {
+public class No<T> {
 
-    private String element;
-    private No next;
+    private T element;
+    private No<T> next;
 
-    public No(String element){
+    public No(T element){
         this.element = element;
         this.next = null;
     }
 
-    public No(String element, No next){
+    public No(T element, No<T> next){
         this.element = element;
         this.next = next;
     }
 
-    public String getElement() {
+    public T getElement() {
         return element;
     }
 
-    public No getNext() {
+    public No<T> getNext() {
         return next;
     }
 
-    public void setNext(No next) {
+    public void setNext(No<T> next) {
         this.next = next;
     }
 
