@@ -1,3 +1,5 @@
+import TAD.CircleLinkedList;
+import TAD.DLinkedList;
 import TAD.LinkedList;
 import TAD.ListaSimples;
 
@@ -6,7 +8,7 @@ import TAD.ListaSimples;
 public class Main {
     public static void main(String[] args) {
 
-       LinkedList<String> l1 = new LinkedList<>();
+     /*  LinkedList<String> l1 = new LinkedList<>();
 
         l1.addFirst("A");
         l1.addFirst("B");
@@ -16,6 +18,8 @@ public class Main {
         l1.addFirst("G");
         l1.addLast("F");
 
+        l1.update("H","C");
+
         l1.print();
 
         l1.removeFirst();
@@ -24,7 +28,29 @@ public class Main {
         System.out.println("--------------------------------------");
         l1.print();
 
-        System.out.println(l1.get("F"));
+        System.out.println(l1.get("F"));*/
+
+        CircleLinkedList<String> l1 = new CircleLinkedList<>();
+
+        l1.addFirst("A");
+        l1.addFirst("B");
+        l1.addLast("C");
+        l1.addLast("D");
+        l1.addLast("E");
+        l1.addFirst("G");
+        l1.addLast("F");
+
+        l1.update("H","C");
+
+        l1.print();
+
+        l1.removeFirst();
+        l1.removeLast();
+
+        System.out.println("--------------------------------------");
+        l1.print();
+
+        System.out.println(l1.get("H"));
 
         /*ListaSimples<Integer> l2 = new ListaSimples<>(Integer.class,10);
 

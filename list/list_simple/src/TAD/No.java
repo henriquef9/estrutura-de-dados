@@ -4,6 +4,7 @@ public class No<T> {
 
     private T element;
     private No<T> next;
+    private No<T> previous;
 
     public No(T element){
         this.element = element;
@@ -19,12 +20,22 @@ public class No<T> {
         return element;
     }
 
+    public void setElement(T element) {this.element = element;}
+
     public No<T> getNext() {
         return next;
     }
 
     public void setNext(No<T> next) {
         this.next = next;
+    }
+
+    public No<T> getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(No<T> previous) {
+        this.previous = previous;
     }
 
 }

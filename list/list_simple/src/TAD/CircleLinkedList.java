@@ -1,43 +1,47 @@
 package TAD;
 
-public class LinkedList<T> {
+public class CircleLinkedList<T> {
 
-    public No<T> first;
-    public No<T> last;
-    public int size;
+    private No<T> first;
+    private No<T> last;
+    private int size;
 
-    public LinkedList() {
+    public CircleLinkedList() {
         this.first = null;
         this.last = null;
         this.size = 0;
     }
 
     public void addFirst(T element){
-        No<T> novo = new No<T>(element);
-        if(this.isEmpty()){
-            this.first = novo;
-            this.last = novo;
-        }
-        else{
-            novo.setNext(this.first);
-            this.first = novo;
-        }
-
-        this.size++;
-    }
-
-    public void addLast(T element){
-        No<T> novo = new No<T>(element);
+        No<T> novo = new No<>(element);
         if(this.isEmpty()){
             this.first = novo;
             this.last = novo;
         }else{
+            this.first.setPrevious(novo);
+            novo.setNext(this.first);
+            this.first = novo;
+            novo.setPrevious(this.last);
             this.last.setNext(novo);
-            this.last = novo;
         }
-
         this.size++;
     }
+
+    public void addLast(T element){
+        No<T> novo = new No<>(element);
+        if(this.isEmpty()){
+            this.first = new No<>(element);
+            this.last = this.first;
+        }else{
+            this.last.setNext(novo);
+            novo.setPrevious(this.last);
+            this.last = novo;
+            novo.setNext(this.first);
+            this.first.setPrevious(novo);
+        }
+        this.size++;
+    }
+
 
     public T removeFirst(){
         if(this.isEmpty()){
@@ -47,9 +51,10 @@ public class LinkedList<T> {
             if(this.size == 1){
                 this.first = null;
                 this.last = null;
-            }
-            else{
+            }else{
                 this.first = this.first.getNext();
+                this.first.setPrevious(this.last);
+                this.last.setNext(this.first);
             }
             this.size--;
             return element;
@@ -64,23 +69,24 @@ public class LinkedList<T> {
             if(this.size == 1){
                 this.first = null;
                 this.last = null;
-            }
-            else{
-                No current = this.first;
-                while(current.getNext() != this.last){
-                    current = current.getNext();
-                }
-                this.last = current;
-                this.last.setNext(null);
+            }else{
+                this.last = this.last.getPrevious();
+                this.last.setNext(this.first);
+                this.first.setPrevious(this.last);
             }
             this.size--;
             return element;
         }
+
     }
 
     public T get(T element){
-        No current = this.first;
-        while(current != null){
+        No<T> current = this.first;
+        if(current.getElement() == element){
+            return element;
+        }
+        current = current.getNext();
+        while (current != this.first){
             if(current.getElement() == element){
                 return element;
             }
@@ -91,7 +97,12 @@ public class LinkedList<T> {
 
     public boolean update(T element, T element_old){
         No<T> current = this.first;
-        while(current != null){
+        if(current.getElement() == element_old){
+            current.setElement(element);
+            return true;
+        }
+        current = current.getNext();
+        while (current != this.first){
             if(current.getElement() == element_old){
                 current.setElement(element);
                 return true;
@@ -107,9 +118,12 @@ public class LinkedList<T> {
 
     public void print(){
         No current = this.first;
-        while(current != null){
+        System.out.println(current.getElement());
+        current = current.getNext();
+        while(current != this.first){
             System.out.println(current.getElement());
             current = current.getNext();
         }
     }
+
 }

@@ -1,41 +1,40 @@
 package TAD;
 
-public class LinkedList<T> {
+public class DLinkedList<T> {
 
-    public No<T> first;
-    public No<T> last;
-    public int size;
+    private No<T> first;
+    private No<T> last;
+    private int size;
 
-    public LinkedList() {
+    public DLinkedList() {
         this.first = null;
         this.last = null;
         this.size = 0;
     }
 
     public void addFirst(T element){
-        No<T> novo = new No<T>(element);
+        No<T> novo = new No<>(element);
         if(this.isEmpty()){
             this.first = novo;
             this.last = novo;
-        }
-        else{
+        }else{
+            this.first.setPrevious(novo);
             novo.setNext(this.first);
             this.first = novo;
         }
-
         this.size++;
     }
 
     public void addLast(T element){
-        No<T> novo = new No<T>(element);
+        No<T> novo = new No<>(element);
         if(this.isEmpty()){
             this.first = novo;
             this.last = novo;
         }else{
             this.last.setNext(novo);
+            novo.setPrevious(this.last);
             this.last = novo;
         }
-
         this.size++;
     }
 
@@ -47,9 +46,9 @@ public class LinkedList<T> {
             if(this.size == 1){
                 this.first = null;
                 this.last = null;
-            }
-            else{
+            }else{
                 this.first = this.first.getNext();
+                this.first.setPrevious(null);
             }
             this.size--;
             return element;
@@ -64,13 +63,8 @@ public class LinkedList<T> {
             if(this.size == 1){
                 this.first = null;
                 this.last = null;
-            }
-            else{
-                No current = this.first;
-                while(current.getNext() != this.last){
-                    current = current.getNext();
-                }
-                this.last = current;
+            }else{
+                this.last = this.last.getPrevious();
                 this.last.setNext(null);
             }
             this.size--;
@@ -80,7 +74,7 @@ public class LinkedList<T> {
 
     public T get(T element){
         No current = this.first;
-        while(current != null){
+        while (current != null){
             if(current.getElement() == element){
                 return element;
             }
@@ -91,7 +85,7 @@ public class LinkedList<T> {
 
     public boolean update(T element, T element_old){
         No<T> current = this.first;
-        while(current != null){
+        while (current != null){
             if(current.getElement() == element_old){
                 current.setElement(element);
                 return true;
@@ -112,4 +106,5 @@ public class LinkedList<T> {
             current = current.getNext();
         }
     }
+
 }
