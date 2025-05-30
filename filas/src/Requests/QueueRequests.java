@@ -1,6 +1,6 @@
 package Requests;
 
-
+// fila de requests com prioridade (low, medium, high)
 public class QueueRequests {
 
     private NoRequest first;

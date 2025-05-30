@@ -1,30 +1,25 @@
 package TAD;
 
-public class Queue<T> {
-
-    /**
-     * Represents the reference to the first*/
+public class CircleQueue<T> {
     private No<T> first;
     private No<T> last;
     private int size;
 
-    public Queue() {
+    public CircleQueue() {
         this.first = null;
         this.last = null;
         this.size = 0;
     }
 
-    public boolean isEmpty() {
-        return this.size == 0;
-    }
-
     public void enqueue(T element) {
-        if(this.isEmpty()) {
-            this.first = new No<T>(element);
-            this.last = this.first;
+        No<T> novo = new No<>(element);
+        if(this.isEmpty()){
+            this.first = novo;
+            this.last = novo;
         }else{
-            this.last.setNext(new No<T>(element));
-            this.last= this.last.getNext();
+            this.last.setNext(novo);
+            this.last = novo;
+            this.last.setNext(this.first);
         }
         this.size++;
     }
@@ -37,20 +32,28 @@ public class Queue<T> {
             if(this.size == 1){
                 this.first = null;
                 this.last = null;
-            }else {
+            }else{
                 this.first = this.first.getNext();
+                this.last.setNext(this.first);
             }
             this.size--;
             return element;
         }
     }
 
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
     public void print() {
         No<T> current = this.first;
-        while(current != null){
+        System.out.println(current.getElement());
+        current = current.getNext();
+        while(current != this.first){
             System.out.println(current.getElement());
             current = current.getNext();
         }
 
     }
+
 }
