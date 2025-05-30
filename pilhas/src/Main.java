@@ -7,7 +7,7 @@ public class Main {
 
         Stack<Character> stack = new Stack<>();
 
-        String word = "ababaababa";
+        String word = "ababamababa";
 
         int midx = word.length() / 2;
 
@@ -16,10 +16,11 @@ public class Main {
                 stack.push(word.charAt(i));
             }
 
+            System.out.println(stack.peek());
+
             for(int i = midx; i < word.length(); i++) {
                 char popped = stack.pop();
                 if(popped != word.charAt(i)){
-                    System.out.println(popped + " != " + word.charAt(i));
                     break;
                 }
             }
@@ -28,10 +29,11 @@ public class Main {
                 stack.push(word.charAt(i));
             }
 
+            System.out.println(stack.peek());
+
             for(int i = midx; i < word.length(); i++) {
                 char popped = stack.pop();
                 if(popped != word.charAt(i)){
-                    System.out.println(popped + " != " + word.charAt(i));
                     break;
                 }
             }
