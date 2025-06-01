@@ -40,6 +40,11 @@ public class No<T extends Comparable<T>> implements Comparable<No<T>> {
         this.right = right;
     }
 
-
+    @Override
+    public String toString() {
+        return "No{" +
+                "element=" + element +
+                '}';
+    }
 
 }

@@ -16,53 +16,47 @@ public class BinaryTree<T extends Comparable<T>> {
         this.size = 1;
     }
 
+    // O critério de inserção é valor menor para esquerda e maior igual para direita
     public void insert(T element){
-        No<T> novo = new No<>(element);
-
-        No<T> current = this.raiz;
-        No<T> parent = null;
-        while(current != null){
-            if(element.compareTo(current.getElement()) < 0){
-                parent = current;
-                current = current.getLeft();
-            }else if(element.compareTo(current.getElement()) >= 0){
-                parent = current;
-                current = current.getRight();
-            }
-        }
-
-        if(parent == null){
-            this.raiz = novo;
-        }else if(element.compareTo(parent.getElement()) < 0){
-            parent.setLeft(novo);
-        }else{
-            parent.setRight(novo);
-        }
-
+        this.raiz = insertRec(this.raiz, element);
         this.size++;
     }
 
-    public No<T> search(T element){
-        No<T> current = this.raiz;
-        while(current != null && current.getElement().compareTo(element) != 0){
-            if(current.getElement().compareTo(element) < 0){
-                current = current.getLeft();
-            }else{
-                current = current.getRight();
-            }
+    private No<T> insertRec(No<T> no, T element){
+        if(no == null){
+            return new No<>(element);
+        }else if(element.compareTo(no.getElement()) < 0){
+            no.setLeft(insertRec(no.getLeft(), element));
+        }else{
+            no.setRight(insertRec(no.getRight(), element));
         }
-        return current;
+        return no;
+    }
+
+    public No<T> search(T element){
+        return searchRec(this.raiz, element);
+    }
+
+    private No<T> searchRec(No<T> no, T element){
+        if(no == null){
+            return null;
+        }else if(element.compareTo(no.getElement()) < 0){
+            return searchRec(no.getLeft(), element);
+        }else if(element.compareTo(no.getElement()) > 0){
+            return searchRec(no.getRight(), element);
+        }else{
+            return no;
+        }
     }
 
     public T remove(T element){
         No<T> current = this.raiz;
         No<T> parent = null;
         while(current != null && element.compareTo(current.getElement()) != 0){
+            parent = current;
             if(element.compareTo(current.getElement()) < 0){
-                parent = current;
                 current = current.getLeft();
             }else{
-                parent = current;
                 current = current.getRight();
             }
         }
@@ -81,21 +75,17 @@ public class BinaryTree<T extends Comparable<T>> {
                 if(current == this.raiz){
                     this.raiz = current.getRight();
                 }else if(parent.getLeft() == current){
-                    current = current.getRight();
-                    parent.setLeft(current);
+                    parent.setLeft(current.getRight());
                 }else {
-                    current = current.getRight();
-                    parent.setRight(current);
+                    parent.setRight(current.getRight());
                 }
             }else if(current.getRight() == null){
                 if(current == this.raiz){
                     this.raiz = current.getLeft();
                 }else if(parent.getLeft() == current){
-                    current = current.getLeft();
-                    parent.setLeft(current);
+                    parent.setLeft(current.getLeft());
                 }else{
-                    current = current.getLeft();
-                    parent.setRight(current);
+                    parent.setRight(current.getLeft());
                 }
             }else{
                 // Encontrar o sucessor (menor valor da subárvore direita)
@@ -105,7 +95,13 @@ public class BinaryTree<T extends Comparable<T>> {
                     parentSuccessor = successor;
                     successor = successor.getLeft();
                 }
-                parentSuccessor.setLeft(successor.getRight());
+
+                if(parentSuccessor != current) {
+                    parentSuccessor.setLeft(successor.getRight());
+                } else {
+                    parentSuccessor.setRight(successor.getRight());
+                }
+
                 current.setElement(successor.getElement());
             }
 

@@ -31,6 +31,7 @@ public class Main {
         System.out.println("----------------------");
         System.out.println(tree.remove(10));
         System.out.println(tree.remove(15));
+        System.out.println(tree.search(30));
         System.out.println("----------------------");
 
         System.out.println("---------------- Pre-Order");
