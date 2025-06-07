@@ -153,6 +153,24 @@ public class BinaryTree<T extends Comparable<T>> {
 
     }
 
+    public boolean isBalanced(){
+
+       return isBalanced(this.raiz);
+
+    }
+
+    private boolean isBalanced(No<T> no){
+        if(no == null){
+            return true;
+        }
+
+        int leftHeight = heightSubTree(no.getLeft());
+        int rightHeight = heightSubTree(no.getRight());
+
+        return Math.abs(leftHeight - rightHeight) <= 1 && isBalanced(no.getLeft()) && isBalanced(no.getRight());
+
+    }
+
     public void preOrder(){
         this.preOrder(this.raiz);
     }
