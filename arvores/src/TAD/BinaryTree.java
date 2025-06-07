@@ -133,6 +133,26 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
 
+    public int height(){
+
+        return heightSubTree(this.raiz) - 1;
+
+    }
+
+
+    private int heightSubTree(No<T> no) {
+
+        if(no == null){
+            return 0;
+        }
+
+        int leftHeight = heightSubTree(no.getLeft());
+        int rightHeight = heightSubTree(no.getRight());
+
+        return Math.max(leftHeight, rightHeight) + 1;
+
+    }
+
     public void preOrder(){
         this.preOrder(this.raiz);
     }

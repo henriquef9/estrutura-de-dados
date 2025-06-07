@@ -48,6 +48,7 @@ public class Main {
         System.out.println("-----------------------");
         System.out.println(tree.maximum());
         System.out.println(tree.minimum());
+        System.out.println(tree.height());
 
 
     }
