@@ -112,6 +112,26 @@ public class BinaryTree<T extends Comparable<T>> {
         return null;
     }
 
+    public T minimum(){
+        No<T> current = this.raiz;
+
+        while(current.getLeft() != null) {
+            current = current.getLeft();
+        }
+
+        return current.getElement();
+    }
+
+    public T maximum(){
+        No<T> current = this.raiz;
+
+        while(current.getRight() != null) {
+            current = current.getRight();
+        }
+
+        return current.getElement();
+    }
+
 
     public void preOrder(){
         this.preOrder(this.raiz);

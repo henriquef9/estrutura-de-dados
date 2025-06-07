@@ -45,5 +45,10 @@ public class Main {
         System.out.println();
 
 
+        System.out.println("-----------------------");
+        System.out.println(tree.maximum());
+        System.out.println(tree.minimum());
+
+
     }
 }
